@@ -1,25 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.Models.Views;
 
 namespace WebApp.Controllers;
 
 public class AuthController : Controller
 {
-    [Route("signup")]
+    [Route("/signup")]
+    [HttpGet]
     public IActionResult SignUp()
     {
-        ViewData["Title"] = "Sign Up.";
+        ViewData["Title"] = "Sign Up";
+        var viewModel = new SignUpViewModel();
+        return View(viewModel);
+    }
+
+    [Route("/signup")]
+    [HttpPost]
+    public IActionResult SignUp(SignUpViewModel model)
+    {
+        ViewData["Title"] = "Sign Up";
         return View();
     }
 
-    //public IActionResult SignIn()
-    //{
-    //    ViewData["Title"] = "Sign In.";
-    //    return View();
-    //}
-
-
-    //public new IActionResult SignOut()
-    //{
-    //    return RedirectToAction("Index", "Home");
-    //}
 }
