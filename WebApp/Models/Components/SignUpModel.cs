@@ -5,16 +5,17 @@ namespace WebApp.Models.Components;
 public class SignUpModel
 {
     [Display(Name = "First Name", Prompt = "Enter your first name", Order = 0)]
-    [Required(ErrorMessage = "Invalid first name")]
+    [Required(ErrorMessage = "first name is required")]
     public string FirstName { get; set; } = null!;
 
     [Display(Name = "Last Name", Prompt = "Enter your last name", Order = 1)]
-    [Required(ErrorMessage = "Invalid last name")]
+    [Required(ErrorMessage = "last name is required")]
     public string LastName { get; set; } = null!;
 
     [DataType(DataType.EmailAddress)]
     [Display(Name = "Email", Prompt = "Enter your email", Order = 2)]
     [EmailAddress(ErrorMessage = "Invalid email")]
+    [Required(ErrorMessage = "Email is required")]
     public string Email { get; set; } = null!;
 
     [Display(Name = "Password", Prompt = "Enter your password", Order = 3)]
@@ -32,6 +33,29 @@ public class SignUpModel
 
     [Display(Name = "I agree to the terms and conditions", Order = 5)]
     [Range(typeof(bool), "true", "true", ErrorMessage = "You must agree to the terms and conditions")]
+    //[CheckBoxRequired(ErrorMessage = "You must agree to the terms and conditions")]
     public bool TermsAndConditions { get; set; } = false;
 
 }
+
+//public class CheckBoxRequired : ValidationAttribute
+//{
+//    public override bool IsValid(object? value)
+//    {
+//        return value is bool boolean && boolean;
+//    }
+//}
+
+//public class CheckBoxRequired : ValidationAttribute, IClientModelValidator
+//{
+//    public void AddValidation(ClientModelValidationContext context)
+//    {
+//        throw new NotImplementedException();
+//    }
+
+//    public override bool IsValid(object value)
+//    {
+//        return value is bool boolean && boolean;
+//    }
+//}
+
