@@ -29,13 +29,15 @@
     color: $white;
     padding-top: 10px;
     padding-bottom: 13px;
+    border: none;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
         @include theme-secondary-shadow;
         text-decoration: none;
         background: $gray-700;
         color: $white;
-    } 
+    }
 }
 
 .btn-gray { 
