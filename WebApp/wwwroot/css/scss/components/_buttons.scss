@@ -9,6 +9,18 @@
     gap: 12px;
 }
 
+.btn-transparent {
+    @include button;
+    border: none;
+    color: $gray-800;
+
+    &:hover {
+        text-decoration: none;
+        background: $gray-700;
+        color: $white;
+    }
+}
+
 .btn-theme { 
     @include button;
     background: $theme;

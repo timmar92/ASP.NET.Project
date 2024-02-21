@@ -211,6 +211,24 @@ a:hover {
   text-decoration: none;
 }
 
+.btn-transparent {
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+  padding: 8px 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border: none;
+  color: #33354D;
+}
+.btn-transparent:hover {
+  text-decoration: none;
+  background: #565973;
+  color: #FFFFFF;
+}
+
 .btn-theme {
   border-radius: 6px;
   text-align: center;
@@ -944,7 +962,7 @@ footer .container .social-media {
 }
 #account-details .details .basic-info form .content .form-buttons {
   grid-area: buttons;
-  margin: 2opx auto;
+  margin: 20px 0;
   display: flex;
   gap: 20px;
 }
