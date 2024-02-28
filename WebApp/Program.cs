@@ -15,12 +15,15 @@ builder.Services.AddScoped<FeatureRepository>();
 builder.Services.AddScoped<FeatureItemRepository>();
 
 
-
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AddressService>();
 builder.Services.AddScoped<FeatureService>();
 
-
+builder.Services.AddAuthentication("AuthCookie").AddCookie("AuthCookie", x =>
+    {
+        x.Cookie.Name = "Grandmas.Cookie";
+        x.LoginPath = "/auth/signin";
+    });
 
 
 
@@ -29,7 +32,10 @@ app.UseHsts();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseAuthorization();
+
+
+app.UseAuthentication(); // who are you?
+app.UseAuthorization(); // what are you allowed to do?
 
 app.MapControllerRoute(
     name: "default",
