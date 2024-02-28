@@ -9,6 +9,24 @@ public class AddressService(AddressRepository addressRepository)
 {
     private readonly AddressRepository _addressRepository = addressRepository;
 
+    public async Task<ResponseResult> GetOrCreateAddressAsync(string streetName, string postalCode, string city)
+    {
+        try
+        {
+            var result = await GetAddressAsync(streetName, postalCode, city);
+            if (result.StatusCode == StatusCode.NOT_FOUND)
+            {
+                result = await CreateAddressAsync(streetName, postalCode, city);
+            }
+            return result;
+
+        }
+        catch (Exception ex)
+        {
+            return ResponseFactory.Error(ex.Message);
+        }
+    }
+
 
     public async Task<ResponseResult> CreateAddressAsync(string streetName, string postalCode, string city)
     {

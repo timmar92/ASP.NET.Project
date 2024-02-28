@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApp.Models.Components;
+namespace Infrastructure.Models;
 
 public class SignUpModel
 {
@@ -36,16 +36,4 @@ public class SignUpModel
     [Display(Name = "I agree to the terms and conditions", Order = 5)]
     [Range(typeof(bool), "true", "true", ErrorMessage = "You must agree to the terms & conditions to sell your soul to our dark lord")]
     public bool TermsAndConditions { get; set; } = false;
-
 }
-
-//public class CheckBoxRequired : ValidationAttribute
-//{
-//    public override bool IsValid(object? value)
-//    {
-//        return value is bool boolean && boolean;
-//    }
-//}
-
-
-

@@ -1,6 +1,7 @@
-﻿using WebApp.Models.Components;
+﻿using Infrastructure.Models;
 
-namespace WebApp.Models.Views;
+
+
 
 public class SignUpViewModel
 {

@@ -1,11 +1,17 @@
-﻿@model HomeIndexViewModel
+﻿
+
+@{
+    ViewData["Title"] = "Overview";
+}
 
 
-@await Html.PartialAsync("~/Views/Shared/Sections/_Showcase.cshtml", Model.Showcase)
 
-@await Html.PartialAsync("~/Views/Shared/Sections/_Features.cshtml", Model.Features)
 
-@await Html.PartialAsync("~/Views/Shared/Sections/_LightDark.cshtml", Model.LightDark)
+@await Html.PartialAsync("~/Views/Shared/Sections/_Showcase.cshtml")
+
+@await Html.PartialAsync("~/Views/Shared/Sections/_Features.cshtml")
+
+@await Html.PartialAsync("~/Views/Shared/Sections/_LightDark.cshtml")
 
 
 <!-- This is the same but can be used for less complex calls -->

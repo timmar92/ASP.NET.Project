@@ -91,10 +91,7 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
                 await _context.SaveChangesAsync();
                 return ResponseFactory.Ok("Successfully removed");
             }
-            else
-            {
-                return ResponseFactory.NotFound();
-            }
+            return ResponseFactory.NotFound();
 
         }
         catch (Exception ex)
@@ -112,10 +109,7 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
             {
                 return ResponseFactory.Exists();
             }
-            else
-            {
-                return ResponseFactory.NotFound();
-            }
+            return ResponseFactory.NotFound();
 
         }
         catch (Exception ex)

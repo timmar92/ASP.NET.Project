@@ -37,7 +37,7 @@ public class ResponseFactory
         return new ResponseResult
         {
             Message = message ?? "Failed",
-            StatusCode = StatusCode.EXISTS
+            StatusCode = StatusCode.ERROR
         };
     }
 
@@ -55,7 +55,7 @@ public class ResponseFactory
         return new ResponseResult
         {
             Message = message ?? "Already exists",
-            StatusCode = StatusCode.ERROR
+            StatusCode = StatusCode.EXISTS
         };
     }
 }
