@@ -21,8 +21,9 @@ builder.Services.AddScoped<FeatureService>();
 
 builder.Services.AddAuthentication("AuthCookie").AddCookie("AuthCookie", x =>
     {
-        x.Cookie.Name = "Grandmas.Cookie";
-        x.LoginPath = "/auth/signin";
+        x.Cookie.Name = "ChewyChocoChipChunk";
+        x.LoginPath = "/signin";
+        x.ExpireTimeSpan = TimeSpan.FromMinutes(60);
     });
 
 
