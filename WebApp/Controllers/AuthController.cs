@@ -1,5 +1,8 @@
-﻿using Infrastructure.Services;
+﻿using Infrastructure.Models;
+using Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WebApp.Models.Views;
 
 namespace WebApp.Controllers;
@@ -56,6 +59,15 @@ public class AuthController(UserService userService) : Controller
             var result = await _userService.SignInUserAsync(viewModel.Form);
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
             {
+                var userModel = (UserModel)result.ContentResult!;
+                var claims = new List<Claim>
+                {
+                    new(ClaimTypes.NameIdentifier, userModel.Id),
+                    new(ClaimTypes.Name, userModel.Email),
+                    new(ClaimTypes.Email, userModel.Email)
+                };
+
+                await HttpContext.SignInAsync("AuthCookie", new ClaimsPrincipal(new ClaimsIdentity(claims, "AuthCookie")));
                 return RedirectToAction("Details", "Account");
             }
         }
@@ -63,6 +75,13 @@ public class AuthController(UserService userService) : Controller
         viewModel.ErrorMessage = "Incorrect email or password";
         return View(viewModel);
 
+    }
+
+    [HttpGet]
+    public new async Task<IActionResult> SignOut()
+    {
+        await HttpContext.SignOutAsync("AuthCookie");
+        return RedirectToAction("SignIn", "Auth");
     }
 
 }

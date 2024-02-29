@@ -42,7 +42,13 @@ public class UserService(UserRepository userRepository, AddressService addressSe
 
                 if (PasswordHasher.ValidateSecurePassword(model.Password, userEntity.Password, userEntity.SecurtiyKey))
                 {
-                    return ResponseFactory.Ok();
+                    return ResponseFactory.Ok(new UserModel
+                    {
+                        Id = userEntity.Id,
+                        FirstName = userEntity.FirstName,
+                        LastName = userEntity.LastName,
+                        Email = userEntity.Email
+                    });
                 }
             }
             return ResponseFactory.Error("Incorrect email or password")

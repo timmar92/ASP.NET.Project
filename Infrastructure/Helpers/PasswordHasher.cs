@@ -8,29 +8,36 @@ public class PasswordHasher
 {
     public static (string, string) GenerateSecurePassword(string password)
     {
-        using var hmac = new HMACSHA512();
-        var securityKey = hmac.Key;
-        var hashedPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+        try
+        {
+            using var hmac = new HMACSHA512();
+            var securityKey = hmac.Key;
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
 
-        return (Convert.ToBase64String(securityKey), Convert.ToBase64String(hashedPassword));
+            return (Convert.ToBase64String(securityKey), Convert.ToBase64String(computedHash));
+        }
+        catch { }
+        return (null!, null!);
     }
 
-    public static bool ValidateSecurePassword(string password, string hash, string securityKey)
+    public static bool ValidateSecurePassword(string password, string hashedPassword, string securityKey)
     {
-        var security = Convert.FromBase64String(securityKey);
-        var pwd = Convert.FromBase64String(hash);
-
-        using var hmac = new HMACSHA512(security);
-        var hashedPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-
-        for (var i = 0; i < hashedPassword.Length; i++)
+        try
         {
-            if (hashedPassword[i] != hash[i])
+            using var hmac = new HMACSHA512(Convert.FromBase64String(securityKey));
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            var hash = Convert.FromBase64String(hashedPassword);
+
+            for (int i = 0; i < computedHash.Length; i++)
             {
-                return false;
+                if (computedHash[i] != hash[i])
+                {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
+        catch { }
+        return false;
     }
 }
